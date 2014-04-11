@@ -1,4 +1,4 @@
-_ = require('lodash')
+var flatten = require('flatten')
 
 module.exports = function(layer, done){
   var xmin = Infinity,
@@ -17,19 +17,19 @@ module.exports = function(layer, done){
           break
         case 'Polygon':
           coordinates = layer.features[i].geometry.coordinates
-          coordinates = _.flatten(coordinates, true)
+          coordinates = flatten(coordinates)
           break
         case 'MultiPoint':
           coordinates = layer.features[i].geometry.coordinates
           break
         case 'MultiLineString':
           coordinates = layer.features[i].geometry.coordinates
-          coordinates = _.flatten(coordinates, true)
+          coordinates = flatten(coordinates)
           break
         case 'MultiPolygon':
           coordinates = layer.features[i].geometry.coordinates
-          coordinates = _.flatten(coordinates, true)
-          coordinates = _.flatten(coordinates, true)
+          coordinates = flatten(coordinates)
+          coordinates = flatten(coordinates)
           break
       }
       if(!layer.features[i].geometry && layer.features[i].properties){
@@ -72,19 +72,19 @@ module.exports = function(layer, done){
         break
       case 'Polygon':
         coordinates = geometry.coordinates
-        coordinates = _.flatten(coordinates, true)
+        coordinates = flatten(coordinates)
         break
       case 'MultiPoint':
         coordinates = geometry.coordinates
         break
       case 'MultiLineString':
         coordinates = geometry.coordinates
-        coordinates = _.flatten(coordinates, true)
+        coordinates = flatten(coordinates)
         break
       case 'MultiPolygon':
         coordinates = geometry.coordinates
-        coordinates = _.flatten(coordinates, true)
-        coordinates = _.flatten(coordinates, true)
+        coordinates = flatten(coordinates)
+        coordinates = flatten(coordinates)
         break
     }
     if(!geometry){

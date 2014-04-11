@@ -26,5 +26,8 @@
   "homepage": "https://github.com/morganherlocker/turf-extent",
   "devDependencies": {
     "tape": "^2.12.3"
+  },
+  "dependencies": {
+    "flatten": "0.0.1"
   }
 }
