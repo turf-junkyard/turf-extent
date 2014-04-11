@@ -1,3 +1,11 @@
+var test = require('tape')
+var extent = require('./')
+
+test('extent', function(t){
+  
+})
+
+
 var t = require('../index'),
     should = require('should')
 
