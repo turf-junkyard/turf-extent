@@ -1,6 +1,6 @@
 var flatten = require('flatten')
 
-module.exports = function(layer, done){
+module.exports = function(layer){
   var xmin = Infinity,
       ymin = Infinity,
       xmax = -Infinity,
@@ -33,7 +33,7 @@ module.exports = function(layer, done){
           break
       }
       if(!layer.features[i].geometry && layer.features[i].properties){
-        throw new Error('Unknown Geometry Type')
+        return new Error('Unknown Geometry Type')
       }
       
       for(var n in coordinates){
@@ -52,7 +52,7 @@ module.exports = function(layer, done){
       }
     }
     var bbox = [xmin, ymin, xmax, ymax]
-    done(null, bbox)
+    return bbox
   }
   else{
     var coordinates 
@@ -88,7 +88,7 @@ module.exports = function(layer, done){
         break
     }
     if(!geometry){
-      throw new Error('No Geometry Found')
+      return new Error('No Geometry Found')
     }
     
     for(var n in coordinates){
@@ -106,6 +106,6 @@ module.exports = function(layer, done){
       }
     }
     var bbox = [xmin, ymin, xmax, ymax]
-    done(null, bbox)
+    return bbox
   }
 }
