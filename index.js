@@ -32,6 +32,7 @@ module.exports = function(layer){
           coordinates = flatten(coordinates)
           break
       }
+      console.log(coordinates)
       if(!layer.features[i].geometry && layer.features[i].properties){
         return new Error('Unknown Geometry Type')
       }

@@ -8,7 +8,6 @@ module.exports = {
         "coordinates": [102.0, 0.5]
       },
       "properties": {
-        "prop0": "value0"
       }
     },
     {
@@ -20,8 +19,6 @@ module.exports = {
         ]
       },
       "properties": {
-        "prop1": 0.0,
-        "prop0": "value0"
       }
     },
     {
@@ -36,10 +33,6 @@ module.exports = {
         ]
       },
       "properties": {
-        "prop1": {
-          "this": "that"
-        },
-        "prop0": "value0"
       }
     }
   ]

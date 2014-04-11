@@ -14,7 +14,7 @@ test('extent', function(t){
   // FeatureCollection
   var fcExtent = extent(fc)
 
-  t.ok(fcExtent)
+  t.ok(fcExtent, 'FeatureCollection')
   t.equal(fcExtent[0], 20)
   t.equal(fcExtent[1], -10)
   t.equal(fcExtent[2], 130)
@@ -23,7 +23,7 @@ test('extent', function(t){
   // Point
   var ptExtent = extent(pt)
 
-  t.ok(ptExtent)
+  t.ok(ptExtent, 'Point')
   t.equal(fcExtent[0], 102)
   t.equal(ptExtent[1], 0.5)
   t.equal(ptExtent[2], 102)
@@ -32,7 +32,7 @@ test('extent', function(t){
   // Line
   var lineExtent = extent(line)
 
-  t.ok(lineExtent)
+  t.ok(lineExtent, 'Line')
   t.equal(lineExtent[0], 102)
   t.equal(lineExtent[1], -10)
   t.equal(lineExtent[2], 130)
@@ -41,7 +41,7 @@ test('extent', function(t){
   // Polygon
   var polyExtent = extent(poly)
 
-  t.ok(polyExtent)
+  t.ok(polyExtent, 'Polygon')
   t.equal(polyExtent[0], 100)
   t.equal(polyExtent[1], 0)
   t.equal(polyExtent[2], 101)
@@ -50,7 +50,7 @@ test('extent', function(t){
   // MultiLineString
   var multiLineExtent = extent(multiLine)
 
-  t.ok(multiLineExtent)
+  t.ok(multiLineExtent, 'MultiLineString')
   t.equal(multiLineExtent[0], 100)
   t.equal(multiLineExtent[1], 0)
   t.equal(multiLineExtent[2], 103)
@@ -59,7 +59,7 @@ test('extent', function(t){
   // MultiPolygon
   var multiPolyExtent = extent(multiPoly)
 
-  t.ok(multiPolyExtent)
+  t.ok(multiPolyExtent, 'MultiPolygon')
   t.equal(multiPolyExtent[0], 100)
   t.equal(multiPolyExtent[1], 0)
   t.equal(multiPolyExtent[2], 103)
