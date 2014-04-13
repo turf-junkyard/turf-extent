@@ -17,22 +17,20 @@ module.exports = function(layer){
           break
         case 'Polygon':
           coordinates = layer.features[i].geometry.coordinates
-          coordinates = flatten(coordinates)
+          coordinates = flatCoords(coordinates)
           break
         case 'MultiPoint':
           coordinates = layer.features[i].geometry.coordinates
           break
         case 'MultiLineString':
           coordinates = layer.features[i].geometry.coordinates
-          coordinates = flatten(coordinates)
+          coordinates = flatCoords(coordinates)
           break
         case 'MultiPolygon':
           coordinates = layer.features[i].geometry.coordinates
-          coordinates = flatten(coordinates)
-          coordinates = flatten(coordinates)
+          coordinates = flatCoords(coordinates)
           break
       }
-      console.log(coordinates)
       if(!layer.features[i].geometry && layer.features[i].properties){
         return new Error('Unknown Geometry Type')
       }
@@ -73,19 +71,18 @@ module.exports = function(layer){
         break
       case 'Polygon':
         coordinates = geometry.coordinates
-        coordinates = flatten(coordinates)
+        coordinates = flatCoords(coordinates)
         break
       case 'MultiPoint':
         coordinates = geometry.coordinates
         break
       case 'MultiLineString':
         coordinates = geometry.coordinates
-        coordinates = flatten(coordinates)
+        coordinates = flatCoords(coordinates)
         break
       case 'MultiPolygon':
         coordinates = geometry.coordinates
-        coordinates = flatten(coordinates)
-        coordinates = flatten(coordinates)
+        coordinates = flatCoords(coordinates)
         break
     }
     if(!geometry){
@@ -109,4 +106,14 @@ module.exports = function(layer){
     var bbox = [xmin, ymin, xmax, ymax]
     return bbox
   }
+}
+
+function flatCoords(coords){
+  var newCoords = []
+  coords = flatten(coords)
+  coords.forEach(function(c, i){
+    if(i % 2 == 0) // if is even
+    newCoords.push([c, coords[i+1]])
+  })
+  return newCoords
 }

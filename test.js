@@ -22,9 +22,8 @@ test('extent', function(t){
 
   // Point
   var ptExtent = extent(pt)
-
   t.ok(ptExtent, 'Point')
-  t.equal(fcExtent[0], 102)
+  t.equal(ptExtent[0], 102)
   t.equal(ptExtent[1], 0.5)
   t.equal(ptExtent[2], 102)
   t.equal(ptExtent[3], 0.5)
