@@ -12,5 +12,5 @@ var fc = JSON.parse(fs.readFileSync('/path/to/myFeatureCollection.geojson'))
 
 var bbox = extent(fc)
     
-console.log(extent) // [minX, minY, maxX, maxY]
+console.log(bbox) // [minX, minY, maxX, maxY]
 ```
