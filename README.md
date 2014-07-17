@@ -4,6 +4,26 @@ turf-extent
 
 Calculates the extent of all features and returns a bounding box.
 
+###Install
+
+```sh
+npm install turf-extent
+```
+
+###Parameters
+
+|name|description|
+|---|---|
+|fc|a FeatureCollection|
+
+###Usage
+
+```js
+extent(fc)
+```
+
+###Example
+
 ```javascript
 var extent = require('turf-extent')
 var fs = require('fs')
