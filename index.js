@@ -1,52 +1,52 @@
-var flatten = require('flatten')
+var flatten = require('flatten');
 
 module.exports = function(layer){
   var xmin = Infinity,
       ymin = Infinity,
       xmax = -Infinity,
-      ymax = -Infinity
+      ymax = -Infinity;
   if(layer.type === 'FeatureCollection'){
     for(var i in layer.features){
-      var coordinates 
+      var coordinates;
       switch(layer.features[i].geometry.type){
         case 'Point':
-          coordinates = [layer.features[i].geometry.coordinates]
+          coordinates = [layer.features[i].geometry.coordinates];
           break
         case 'LineString':
-          coordinates = layer.features[i].geometry.coordinates
+          coordinates = layer.features[i].geometry.coordinates;
           break
         case 'Polygon':
-          coordinates = layer.features[i].geometry.coordinates
-          coordinates = flatCoords(coordinates)
+          coordinates = layer.features[i].geometry.coordinates;
+          coordinates = flatCoords(coordinates);
           break
         case 'MultiPoint':
-          coordinates = layer.features[i].geometry.coordinates
+          coordinates = layer.features[i].geometry.coordinates;
           break
         case 'MultiLineString':
-          coordinates = layer.features[i].geometry.coordinates
-          coordinates = flatCoords(coordinates)
+          coordinates = layer.features[i].geometry.coordinates;
+          coordinates = flatCoords(coordinates);
           break
         case 'MultiPolygon':
-          coordinates = layer.features[i].geometry.coordinates
-          coordinates = flatCoords(coordinates)
+          coordinates = layer.features[i].geometry.coordinates;
+          coordinates = flatCoords(coordinates);
           break
       }
       if(!layer.features[i].geometry && layer.features[i].properties){
-        return new Error('Unknown Geometry Type')
+        return new Error('Unknown Geometry Type');
       }
       
       for(var n in coordinates){
         if(xmin > coordinates[n][0]){
-          xmin = coordinates[n][0]
+          xmin = coordinates[n][0];
         }
         if(ymin > coordinates[n][1]){
-          ymin = coordinates[n][1]
+          ymin = coordinates[n][1];
         }
         if(xmax < coordinates[n][0]){
-          xmax = coordinates[n][0]
+          xmax = coordinates[n][0];
         }
         if(ymax < coordinates[n][1]){
-          ymax = coordinates[n][1]
+          ymax = coordinates[n][1];
         }
       }
     }
@@ -86,34 +86,34 @@ module.exports = function(layer){
         break
     }
     if(!geometry){
-      return new Error('No Geometry Found')
+      return new Error('No Geometry Found');
     }
     
     for(var n in coordinates){
       if(xmin > coordinates[n][0]){
-        xmin = coordinates[n][0]
+        xmin = coordinates[n][0];
       }
       if(ymin > coordinates[n][1]){
-        ymin = coordinates[n][1]
+        ymin = coordinates[n][1];
       }
       if(xmax < coordinates[n][0]){
-        xmax = coordinates[n][0]
+        xmax = coordinates[n][0];
       }
       if(ymax < coordinates[n][1]){
-        ymax = coordinates[n][1]
+        ymax = coordinates[n][1];
       }
     }
-    var bbox = [xmin, ymin, xmax, ymax]
-    return bbox
+    var bbox = [xmin, ymin, xmax, ymax];
+    return bbox;
   }
 }
 
 function flatCoords(coords){
-  var newCoords = []
-  coords = flatten(coords)
+  var newCoords = [];
+  coords = flatten(coords);
   coords.forEach(function(c, i){
     if(i % 2 == 0) // if is even
-    newCoords.push([c, coords[i+1]])
+      newCoords.push([c, coords[i+1]]);
   })
-  return newCoords
+  return newCoords;
 }
