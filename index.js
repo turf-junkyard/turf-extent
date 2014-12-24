@@ -1,119 +1,76 @@
 var flatten = require('flatten');
 
 module.exports = function(layer){
-  var xmin = Infinity,
-      ymin = Infinity,
-      xmax = -Infinity,
-      ymax = -Infinity;
-  if(layer.type === 'FeatureCollection'){
-    for(var i in layer.features){
-      var coordinates;
-      switch(layer.features[i].geometry.type){
-        case 'Point':
-          coordinates = [layer.features[i].geometry.coordinates];
-          break
-        case 'LineString':
-          coordinates = layer.features[i].geometry.coordinates;
-          break
-        case 'Polygon':
-          coordinates = layer.features[i].geometry.coordinates;
-          coordinates = flatCoords(coordinates);
-          break
-        case 'MultiPoint':
-          coordinates = layer.features[i].geometry.coordinates;
-          break
-        case 'MultiLineString':
-          coordinates = layer.features[i].geometry.coordinates;
-          coordinates = flatCoords(coordinates);
-          break
-        case 'MultiPolygon':
-          coordinates = layer.features[i].geometry.coordinates;
-          coordinates = flatCoords(coordinates);
-          break
-      }
-      if(!layer.features[i].geometry && layer.features[i].properties){
-        return new Error('Unknown Geometry Type');
-      }
-      
-      for(var n in coordinates){
-        if(xmin > coordinates[n][0]){
-          xmin = coordinates[n][0];
-        }
-        if(ymin > coordinates[n][1]){
-          ymin = coordinates[n][1];
-        }
-        if(xmax < coordinates[n][0]){
-          xmax = coordinates[n][0];
-        }
-        if(ymax < coordinates[n][1]){
-          ymax = coordinates[n][1];
-        }
-      }
-    }
-    var bbox = [xmin, ymin, xmax, ymax]
-    return bbox
-  }
-  else{
-    var coordinates 
-    var geometry
-    if(layer.type === 'Feature'){
-      geometry = layer.geometry
-    }
-    else{
-      geometry = layer
-    }
-    switch(geometry.type){
+  var extent = [Infinity, Infinity, -Infinity, -Infinity];
+
+  var features = [];
+  if (layer.type === 'FeatureCollection') features = layer.features;
+  else if (layer.type === 'Feature') features = [layer];
+  else features = [{ geometry: layer }];
+
+  for(var i = 0; i < features.length; i++){
+    var coords = features[i].geometry.coordinates;
+    switch(features[i].geometry.type){
       case 'Point':
-        coordinates = [geometry.coordinates]
-        break
+        extent0(coords, extent);
+        break;
       case 'LineString':
-        coordinates = geometry.coordinates
-        break
-      case 'Polygon':
-        coordinates = geometry.coordinates
-        coordinates = flatCoords(coordinates)
-        break
       case 'MultiPoint':
-        coordinates = geometry.coordinates
-        break
+        extent1(coords, extent);
+        break;
+      case 'Polygon':
       case 'MultiLineString':
-        coordinates = geometry.coordinates
-        coordinates = flatCoords(coordinates)
-        break
+        extent2(coords, extent);
+        break;
       case 'MultiPolygon':
-        coordinates = geometry.coordinates
-        coordinates = flatCoords(coordinates)
-        break
+        extent3(coords, extent);
+        break;
+      default:
+        return new Error('Unknown Geometry Type');
     }
-    if(!geometry){
-      return new Error('No Geometry Found');
-    }
-    
-    for(var n in coordinates){
-      if(xmin > coordinates[n][0]){
-        xmin = coordinates[n][0];
-      }
-      if(ymin > coordinates[n][1]){
-        ymin = coordinates[n][1];
-      }
-      if(xmax < coordinates[n][0]){
-        xmax = coordinates[n][0];
-      }
-      if(ymax < coordinates[n][1]){
-        ymax = coordinates[n][1];
-      }
-    }
-    var bbox = [xmin, ymin, xmax, ymax];
-    return bbox;
+  }
+  return extent;
+};
+
+function extent0(coord, extent) {
+  if(extent[0] > coord[0]) extent[0] = coord[0];
+  if(extent[1] > coord[1]) extent[1] = coord[1];
+  if(extent[2] < coord[0]) extent[2] = coord[0];
+  if(extent[3] < coord[1]) extent[3] = coord[1];
+}
+
+function extent1(coords, extent) {
+  for(var i = 0; i < coords.length; i++){
+    var coord = coords[i];
+    if(extent[0] > coord[0]) extent[0] = coord[0];
+    if(extent[1] > coord[1]) extent[1] = coord[1];
+    if(extent[2] < coord[0]) extent[2] = coord[0];
+    if(extent[3] < coord[1]) extent[3] = coord[1];
   }
 }
 
-function flatCoords(coords){
-  var newCoords = [];
-  coords = flatten(coords);
-  coords.forEach(function(c, i){
-    if(i % 2 == 0) // if is even
-      newCoords.push([c, coords[i+1]]);
-  })
-  return newCoords;
+function extent2(coords, extent) {
+  for(var i = 0; i < coords.length; i++){
+    for(var j = 0; j < coords[i].length; j++){
+      var coord = coords[i][j];
+      if(extent[0] > coord[0]) extent[0] = coord[0];
+      if(extent[1] > coord[1]) extent[1] = coord[1];
+      if(extent[2] < coord[0]) extent[2] = coord[0];
+      if(extent[3] < coord[1]) extent[3] = coord[1];
+    }
+  }
+}
+
+function extent3(coords, extent) {
+  for(var i = 0; i < coords.length; i++){
+    for(var j = 0; j < coords[i].length; j++){
+      for(var k = 0; k < coords[i][j].length; k++){
+        var coord = coords[i][j][k];
+        if(extent[0] > coord[0]) extent[0] = coord[0];
+        if(extent[1] > coord[1]) extent[1] = coord[1];
+        if(extent[2] < coord[0]) extent[2] = coord[0];
+        if(extent[3] < coord[1]) extent[3] = coord[1];
+      }
+    }
+  }
 }
