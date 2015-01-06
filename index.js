@@ -3,7 +3,7 @@ var flatten = require('flatten');
 /**
  * Calculates the extent of all features and returns a bounding box.
  *
- * @alias turf/extent
+ * @module turf/extent
  * @param {GeoJSON-Object} input - any valid GeoJSON Object
  * @return {Array<number>} extent - the bounding box of the GeoJSON given
  * as an array in WSEN order.
