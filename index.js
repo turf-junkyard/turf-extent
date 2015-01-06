@@ -1,5 +1,19 @@
 var flatten = require('flatten');
 
+/**
+ * Calculates the extent of all features and returns a bounding box.
+ *
+ * @alias turf/extent
+ * @param {GeoJSON-Object} input - any valid GeoJSON Object
+ * @return {Array<number>} extent - the bounding box of the GeoJSON given
+ * as an array in WSEN order.
+ * @example
+ * var extent = require('turf-extent')
+ * var fs = require('fs')
+ * var fc = JSON.parse(fs.readFileSync('/path/to/myFeatureCollection.geojson'))
+ * var bbox = extent(fc)
+ * console.log(bbox) // [minX, minY, maxX, maxY]
+ */
 module.exports = function(layer){
   var extent = [Infinity, Infinity, -Infinity, -Infinity];
 
