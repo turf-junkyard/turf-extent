@@ -1,5 +1,3 @@
-var flatten = require('flatten');
-
 /**
  * Calculates the extent of all features and returns a bounding box.
  *
