@@ -8,11 +8,23 @@ var flatten = require('flatten');
  * @return {Array<number>} the bounding box of the GeoJSON given
  * as an array in WSEN order (west, south, east, north)
  * @example
- * var extent = require('turf-extent')
- * var fs = require('fs')
- * var fc = JSON.parse(fs.readFileSync('/path/to/myFeatureCollection.geojson'))
- * var bbox = extent(fc)
- * console.log(bbox) // [minX, minY, maxX, maxY]
+ * var pt1 = turf.point(114.175329, 22.2524);
+ * var pt2 = turf.point(114.170007, 22.267969);
+ * var pt3 = turf.point(114.200649, 22.274641);
+ * var pt4 = turf.point(114.186744, 22.265745);
+ * var fc = turf.featurecollection(
+ *  [pt1, pt2, pt3, pt4]);
+ *
+ * var bbox = turf.extent(fc);
+ * console.log(bbox); //
+ *
+ * var bboxPolygon = turf.bboxPolygon(bbox);
+ * bboxPolygon.properties.fill = '#00f';
+ *
+ * var result = turf.featurecollection(
+ *  fc.features.concat(bboxPolygon));
+ *
+ * //=result
  */
 module.exports = function(layer){
   var extent = [Infinity, Infinity, -Infinity, -Infinity];
