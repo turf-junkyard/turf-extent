@@ -34,7 +34,7 @@ module.exports = function(layer){
 
   for(var i = 0; i < features.length; i++){
     var coords = features[i].geometry.coordinates;
-    switch(features[i].geometry.type){
+    switch (features[i].geometry.type) {
       case 'Point':
         extent0(coords, extent);
         break;
@@ -50,7 +50,7 @@ module.exports = function(layer){
         extent3(coords, extent);
         break;
       default:
-        return new Error('Unknown Geometry Type');
+        throw new Error('Unknown Geometry Type');
     }
   }
   return extent;

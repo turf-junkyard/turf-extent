@@ -64,6 +64,10 @@ test('extent', function(t){
   t.equal(multiPolyExtent[2], 103);
   t.equal(multiPolyExtent[3], 3);
 
+  t.throws(function() {
+      var multiPolyExtent = extent({});
+  }, /Unknown Geometry Type/, 'unknown geometry type error');
+
   t.end();
 })
 
