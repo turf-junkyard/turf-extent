@@ -69,6 +69,4 @@ test('extent', function(t){
   }, /Unknown Geometry Type/, 'unknown geometry type error');
 
   t.end();
-})
-
-
+});

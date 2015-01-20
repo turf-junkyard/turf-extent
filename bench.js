@@ -1,4 +1,5 @@
 global.extent = require('./');
+global.extent2 = require('./index-lazy-reduce');
 var Benchmark = require('benchmark');
 var fs = require('fs');
 
@@ -14,6 +15,10 @@ suite
   .add('turf-extent#FeatureCollection',function () {
     global.extent(global.fc);
   })
+  .add('turf-extent2#FeatureCollection',function () {
+    global.extent2(global.fc);
+  })
+  /*
   .add('turf-extent#Point',function () {
     global.extent(global.pt);
   })
@@ -29,10 +34,10 @@ suite
   .add('turf-extent#MultiPolygon',function () {
     global.extent(global.multiPoly);
   })
+  */
   .on('cycle', function (event) {
     console.log(String(event.target));
   })
   .on('complete', function () {
-    
   })
   .run();

@@ -27,5 +27,8 @@
   "devDependencies": {
     "benchmark": "^1.0.0",
     "tape": "^2.13.3"
+  },
+  "dependencies": {
+    "turf-meta": "^1.0.1"
   }
 }
