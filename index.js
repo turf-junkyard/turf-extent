@@ -8,10 +8,10 @@ var each = require('turf-meta').coordEach;
  * @return {Array<number>} the bounding box of the GeoJSON given
  * as an array in WSEN order (west, south, east, north)
  * @example
- * var pt1 = turf.point(114.175329, 22.2524);
- * var pt2 = turf.point(114.170007, 22.267969);
- * var pt3 = turf.point(114.200649, 22.274641);
- * var pt4 = turf.point(114.186744, 22.265745);
+ * var pt1 = turf.point([114.175329, 22.2524]);
+ * var pt2 = turf.point([114.170007, 22.267969]);
+ * var pt3 = turf.point([114.200649, 22.274641]);
+ * var pt4 = turf.point([114.186744, 22.265745]);
  * var fc = turf.featurecollection(
  *  [pt1, pt2, pt3, pt4]);
  *
