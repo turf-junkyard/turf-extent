@@ -1,6 +1,6 @@
 # turf-extent
 
-[![build status](https://secure.travis-ci.org/turfjs/turf-extent.png)](http://travis-ci.org/turfjs/turf-extent)
+[![build status](https://secure.travis-ci.org/Turfjs/turf-extent.png)](http://travis-ci.org/Turfjs/turf-extent)
 
 turf extent module
 
