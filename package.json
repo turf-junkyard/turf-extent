@@ -4,11 +4,12 @@
   "description": "turf extent module",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "doc": "dox -r < index.js | doxme --readme > README.md"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/morganherlocker/turf-extent.git"
+    "url": "https://github.com/turfjs/turf-extent.git"
   },
   "keywords": [
     "turf",
@@ -21,12 +22,14 @@
   "author": "morganherlocker",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/morganherlocker/turf-extent/issues"
+    "url": "https://github.com/turfjs/turf-extent/issues"
   },
-  "homepage": "https://github.com/morganherlocker/turf-extent",
+  "homepage": "https://github.com/turfjs/turf-extent",
   "devDependencies": {
     "benchmark": "^1.0.0",
-    "tape": "^2.13.3"
+    "tape": "^2.13.3",
+    "dox": "^0.6.1",
+    "doxme": "^1.3.0"
   },
   "dependencies": {
     "turf-meta": "^1.0.1"
