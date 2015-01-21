@@ -4,7 +4,7 @@ var each = require('turf-meta').coordEach;
  * Calculates the extent of all input features and returns a bounding box.
  *
  * @module turf/extent
- * @param {GeoJSON-Object} input any valid GeoJSON Object
+ * @param {GeoJSON} input any valid GeoJSON Object
  * @return {Array<number>} the bounding box of the GeoJSON given
  * as an array in WSEN order (west, south, east, north)
  * @example
