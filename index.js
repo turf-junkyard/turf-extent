@@ -5,7 +5,7 @@ var each = require('turf-meta').coordEach;
  *
  * @module turf/extent
  * @category measurement
- * @param {(Feature<(Point|LineString|Polygon)>|FeatureCollection<(Point|LineString|Polygon)>)} input input features
+ * @param {(Feature|FeatureCollection)} input input features
  * @return {Array<number>} the bounding box of `input` given
  * as an array in WSEN order (west, south, east, north)
  * @example
