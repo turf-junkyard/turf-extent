@@ -1,16 +1,16 @@
 var test = require('tape');
-var fs = require('fs');
 var extent = require('./');
 
 // test data
-var fc = require('./geojson/FeatureCollection');
-var pt  = require('./geojson/Point');
-var line = require('./geojson/LineString');
-var poly = require('./geojson/Polygon');
-var multiLine = require('./geojson/MultiLineString');
-var multiPoly = require('./geojson/MultiPolygon');
+var fc = require('./fixtures/FeatureCollection');
+var gc = require('./fixtures/GeometryCollection');
+var pt  = require('./fixtures/Point');
+var line = require('./fixtures/LineString');
+var poly = require('./fixtures/Polygon');
+var multiLine = require('./fixtures/MultiLineString');
+var multiPoly = require('./fixtures/MultiPolygon');
 
-test('extent', function(t){
+test('extent', function (t) {
   // FeatureCollection
   var fcExtent = extent(fc);
 
@@ -20,8 +20,18 @@ test('extent', function(t){
   t.equal(fcExtent[2], 130);
   t.equal(fcExtent[3], 4);
 
+  // FeatureCollection
+  var gcExtent = extent(gc);
+
+  t.ok(gcExtent, 'GeometryCollection');
+  t.equal(gcExtent[0], 20);
+  t.equal(gcExtent[1], -10);
+  t.equal(gcExtent[2], 130);
+  t.equal(gcExtent[3], 4);
+
   // Point
   var ptExtent = extent(pt);
+
   t.ok(ptExtent, 'Point');
   t.equal(ptExtent[0], 102);
   t.equal(ptExtent[1], 0.5);
@@ -64,8 +74,8 @@ test('extent', function(t){
   t.equal(multiPolyExtent[2], 103);
   t.equal(multiPolyExtent[3], 3);
 
-  t.throws(function() {
-      var multiPolyExtent = extent({});
+  t.throws(function () {
+    extent({});
   }, /Unknown Geometry Type/, 'unknown geometry type error');
 
   t.end();
